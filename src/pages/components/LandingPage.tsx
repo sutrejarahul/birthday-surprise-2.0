@@ -7,7 +7,7 @@ const LandingPage: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-6 bg-gradient-to-br from-[#f6e1c3] to-[#e0a96d] text-[#8B4513] text-center">
       {!showCountdown ? (
-        <div className="max-w-3xl">
+        <div className="max-w-4xl">
           <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-4 drop-shadow-md">
             🎉 A Royal Celebration Awaits! 🎉
           </h1>
