@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import HeartSVG from "../svg/HeartSVG";
 
 interface FloatingHeartsProps {
   playHearts: boolean;
@@ -48,7 +49,7 @@ const FloatingHearts: React.FC<FloatingHeartsProps> = ({ playHearts }) => {
             animation: `floatUp 7s linear ${heart.animationDelay} forwards, fadeIn 0.5s ease-in ${heart.animationDelay} forwards`,
           }}
         >
-          ❤️
+          <HeartSVG />
         </div>
       ))}
       <style>

@@ -1,12 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
+import CakeSVG from "../svg/CakeSVG";
 
 const words = [
   "Happy",
   "Birthday",
   "My",
   "Love!",
-  "🎂💖",
+  <CakeSVG />,
   "You",
   "make",
   "my",
