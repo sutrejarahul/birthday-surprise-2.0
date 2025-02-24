@@ -3,12 +3,14 @@ import { motion } from "framer-motion";
 import Confetti from "react-confetti";
 import FloatingHearts from "./FloatingHearts";
 import BirthdayMessage from "./BirthdayMessage";
+import RomanticPopup from "./RomanticPopup";
 
 const BirthdayReveal: React.FC = () => {
   const [playCheer, setPlayCheer] = useState(true);
   const [playSong, setPlaySong] = useState(false);
   const [playHearts, setPlayHearts] = useState(false); // Controls Floating Hearts
   const [showConfetti, setShowConfetti] = useState(true); // Controls Confetti
+  const [showPopup, setShowPopup] = useState(false);
   const songRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -29,6 +31,7 @@ const BirthdayReveal: React.FC = () => {
 
       songRef.current.onended = () => {
         setPlayHearts(false); // Stop hearts when song ends
+        setShowPopup(true); // 🎉 Show popup after song finishes
       };
     }
   }, [playSong]);
@@ -67,6 +70,9 @@ const BirthdayReveal: React.FC = () => {
           <source src="/happy_birthday.mp3" type="audio/mpeg" />
         </audio>
       )}
+
+      <RomanticPopup show={showPopup} />
+
     </div>
   );
 };
