@@ -35,7 +35,7 @@ const RomanticPopup: React.FC<{ show: boolean }> = ({ show }) => {
               Your love is the melody of my heart, and tonight, the universe sings for you.
             </p>
             <button
-              onClick={() => router.push("/romantic-message")}
+              onClick={() => router.push("/heartfelt")}
               className="bg-white text-[#f7797d] px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold text-lg md:text-xl shadow-md hover:bg-[#ffe066] transition-all duration-300"
             >
               Discover the Words of My Heart 💖

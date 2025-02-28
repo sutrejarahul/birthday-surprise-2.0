@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import { motion, easeInOut } from "framer-motion";
 import PetalSVG from "../svg/RoseSVG"; // Your petal SVG

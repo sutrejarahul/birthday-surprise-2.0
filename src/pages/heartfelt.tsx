@@ -1,7 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import RosePetals from "./components/RosePetals";
+import { useRouter } from "next/navigation";
+import TypewriterText from "./components/TypewriterText";
 
 const FIREFLY_COUNT = 20;
 
@@ -13,27 +15,37 @@ const generateFireflyPositions = () => {
 };
 
 const RomanticMessage: React.FC = () => {
+  const router = useRouter();
   const [fireflyPositions, setFireflyPositions] = useState<{ top: string; left: string }[]>([]);
   const [isClient, setIsClient] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     setFireflyPositions(generateFireflyPositions());
     setIsClient(true);
+
+    // 🎵 Autoplay Fix
+    if (audioRef.current) {
+      audioRef.current.volume = 0.5; // 🔊 Adjust volume
+      audioRef.current.play().catch(() => console.log("User interaction needed for autoplay."));
+    }
   }, []);
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen px-6 bg-gradient-to-br from-[#f6e1c3] to-[#e0a96d] text-[#8B4513] text-center overflow-hidden">
       <RosePetals />
+
+      {/* 🎶 Background Romantic Music */}
+      <audio ref={audioRef} loop autoPlay>
+        <source src="romantic.mp3" type="audio/mp3" />
+      </audio>
+
+      {/* 💖 Message Box */}
       <div className="max-w-5xl relative z-10">
-        <button
-          onClick={() => window.history.back()}
-          className="mt-6 bg-[#d4af37] text-white px-6 py-3 md:px-8 md:py-4 rounded-full text-lg md:text-xl font-semibold hover:bg-[#b99332] transition-all duration-300 shadow-lg"
-        >
-          Back to Surprise 🎁
-        </button>
+        <TypewriterText />
       </div>
 
-      {/* Fireflies Animation */}
+      {/* ✨ Fireflies Animation */}
       {isClient &&
         fireflyPositions.map((pos, i) => (
           <motion.div
