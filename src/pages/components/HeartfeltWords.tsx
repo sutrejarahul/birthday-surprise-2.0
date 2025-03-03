@@ -14,19 +14,19 @@ const messages = [
   "You and me, forever? That’s my favorite love story. 📖",
 ];
 
-
-const TypewriterText: React.FC = () => {
+const HeartfeltWords: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
   const [displayedText, setDisplayedText] = useState("");
   const [charIndex, setCharIndex] = useState(0);
   const [messageIndex, setMessageIndex] = useState(0);
   const [isFinalMessage, setIsFinalMessage] = useState(false);
+  const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
     if (charIndex < messages[messageIndex].length) {
       const timeout = setTimeout(() => {
         setDisplayedText((prev) => prev + messages[messageIndex][charIndex]);
         setCharIndex(charIndex + 1);
-      }, 80); // Typing Speed (Thoda fast kiya)
+      }, 80); // Typing Speed
       return () => clearTimeout(timeout);
     } else if (messageIndex < messages.length - 1) {
       setTimeout(() => {
@@ -36,25 +36,41 @@ const TypewriterText: React.FC = () => {
       }, 4000); // Delay before next message
     } else {
       setIsFinalMessage(true);
+      setTimeout(() => setShowButton(true), 3000); // Show button after final message
     }
   }, [charIndex, messageIndex]);
 
   return (
-    <motion.p
-      className={`text-3xl md:text-5xl font-serif italic tracking-wide text-[#8B4513] ${isFinalMessage ? "animate-bounce" : ""
-        }`}
-      style={{
-        lineHeight: "1.2",
-        textShadow:
-          "0px 0px 12px rgba(255, 255, 255, 0.9), 0px 0px 22px rgba(255, 255, 255, 0.6), 0px 0px 35px rgba(255, 255, 255, 0.5)",
-      }}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      {displayedText}
-    </motion.p>
+    <div className="flex flex-col items-center">
+      <motion.p
+        className={`text-3xl md:text-5xl font-serif italic tracking-wide text-[#8B4513] ${isFinalMessage ? "animate-bounce" : ""
+          }`}
+        style={{
+          lineHeight: "1.2",
+          textShadow:
+            "0px 0px 12px rgba(255, 255, 255, 0.9), 0px 0px 22px rgba(255, 255, 255, 0.6), 0px 0px 35px rgba(255, 255, 255, 0.5)",
+        }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        {displayedText}
+      </motion.p>
+
+      {showButton && (
+        <motion.button
+          onClick={onFinish}
+          className="bg-[#d4af37] text-white px-6 py-3 md:px-8 md:py-4 rounded-full text-lg md:text-xl font-semibold hover:bg-[#b99332] transition-all duration-300 shadow-lg fixed bottom-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+        >
+          <span className="flex items-center">Reveal My Feelings 💖</span>
+        </motion.button>
+      )}
+
+    </div>
   );
 };
 
-export default TypewriterText;
+export default HeartfeltWords;

@@ -1,9 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import Poem from "./components/Poem";
 import RosePetals from "./components/RosePetals";
-import { useRouter } from "next/navigation";
-import TypewriterText from "./components/TypewriterText";
+import HeartfeltWords from "./components/HeartfeltWords";
 
 const FIREFLY_COUNT = 20;
 
@@ -15,9 +15,9 @@ const generateFireflyPositions = () => {
 };
 
 const RomanticMessage: React.FC = () => {
-  const router = useRouter();
   const [fireflyPositions, setFireflyPositions] = useState<{ top: string; left: string }[]>([]);
   const [isClient, setIsClient] = useState(false);
+  const [showPoem, setShowPoem] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const RomanticMessage: React.FC = () => {
 
       {/* 💖 Message Box */}
       <div className="max-w-5xl relative z-10">
-        <TypewriterText />
+        {!showPoem ? <HeartfeltWords onFinish={() => setShowPoem(true)} /> : <Poem />}
       </div>
 
       {/* ✨ Fireflies Animation */}

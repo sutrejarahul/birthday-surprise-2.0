@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Confetti from "react-confetti";
 import FloatingHearts from "./FloatingHearts";
 import BirthdayMessage from "./BirthdayMessage";
-import RomanticPopup from "./RomanticPopup";
+import Popup from "./Popup";
 
 const BirthdayReveal: React.FC = () => {
   const [playCheer, setPlayCheer] = useState(true);
@@ -71,7 +71,13 @@ const BirthdayReveal: React.FC = () => {
         </audio>
       )}
 
-      <RomanticPopup show={showPopup} />
+      <Popup
+        show={showPopup}
+        title="Love, as Infinite as the Stars! ✨❤️"
+        message="Your love is the melody of my heart, and tonight, the universe sings for you."
+        buttonText="Discover the Words of My Heart ❤️"
+        redirectUrl="/heartfelt"
+      />
 
     </div>
   );

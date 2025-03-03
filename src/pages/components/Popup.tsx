@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 
-const RomanticPopup: React.FC<{ show: boolean }> = ({ show }) => {
+interface PopupProps {
+  show: boolean;
+  title: string;
+  message: string;
+  buttonText: string;
+  redirectUrl: string;
+}
+
+const Popup: React.FC<PopupProps> = ({ show, title, message, buttonText, redirectUrl }) => {
   const router = useRouter();
   const [visible, setVisible] = useState(false);
 
@@ -29,16 +37,14 @@ const RomanticPopup: React.FC<{ show: boolean }> = ({ show }) => {
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <h2 className="text-3xl md:text-4xl font-extrabold mb-4 drop-shadow-lg">
-              Love, as Infinite as the Stars! ✨❤️
+              {title}
             </h2>
-            <p className="text-lg md:text-xl mb-6 leading-relaxed">
-              Your love is the melody of my heart, and tonight, the universe sings for you.
-            </p>
+            <p className="text-lg md:text-xl mb-6 leading-relaxed">{message}</p>
             <button
-              onClick={() => router.push("/heartfelt")}
+              onClick={() => router.push(redirectUrl)}
               className="bg-white text-[#f7797d] px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold text-lg md:text-xl shadow-md hover:bg-[#ffe066] transition-all duration-300"
             >
-              Discover the Words of My Heart 💖
+              {buttonText}
             </button>
           </motion.div>
         </motion.div>
@@ -47,4 +53,4 @@ const RomanticPopup: React.FC<{ show: boolean }> = ({ show }) => {
   );
 };
 
-export default RomanticPopup;
+export default Popup;
