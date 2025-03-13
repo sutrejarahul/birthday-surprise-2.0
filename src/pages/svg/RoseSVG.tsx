@@ -1,8 +1,6 @@
 import * as React from "react";
 
-interface PetalSVGProps extends React.SVGProps<SVGSVGElement> { }
-
-const PetalSVG = (props: PetalSVGProps) => (
+const PetalSVG = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     width={30}
     height={30}

@@ -1,8 +1,6 @@
 import * as React from "react";
 
-interface GiftSVGProps extends React.SVGProps<SVGSVGElement> { }
-
-const GiftSVG = (props: GiftSVGProps) => (
+const GiftSVG = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     width={50}
     height={50}

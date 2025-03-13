@@ -7,7 +7,7 @@ const words = [
   "Birthday",
   "My",
   "Love!",
-  <CakeSVG />,
+  <CakeSVG key="cake" />,
   "Wishing",
   "you",
   "endless",

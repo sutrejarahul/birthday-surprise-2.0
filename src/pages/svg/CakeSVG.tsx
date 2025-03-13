@@ -1,8 +1,6 @@
 import * as React from "react";
 
-interface CakeSVGProps extends React.SVGProps<SVGSVGElement> { }
-
-const CakeSVG = (props: CakeSVGProps) => (
+const CakeSVG = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     width={props.width || 40}
     height={props.height || 40}

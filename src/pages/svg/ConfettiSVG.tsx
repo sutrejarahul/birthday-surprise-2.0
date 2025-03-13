@@ -1,8 +1,7 @@
 import * as React from "react";
 
-interface ConfettiSVGProps extends React.SVGProps<SVGSVGElement> { }
 
-const ConfettiSVG = (props: ConfettiSVGProps) => (
+const ConfettiSVG = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     width={50}
     height={50}

@@ -1,8 +1,6 @@
 import * as React from "react";
 
-interface HeartSVGProps extends React.SVGProps<SVGSVGElement> { }
-
-const HeartSVG = (props: HeartSVGProps) => (
+const HeartSVG = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     width={30}
     height={30}

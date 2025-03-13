@@ -1,8 +1,6 @@
 import * as React from "react";
 
-interface MagicSVGProps extends React.SVGProps<SVGSVGElement> { }
-
-const MagicSVG = (props: MagicSVGProps) => (
+const MagicSVG = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     width={50}
     height={50}
