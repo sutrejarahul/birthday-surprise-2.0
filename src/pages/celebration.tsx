@@ -1,10 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
-import Poem from "./components/Poem";
-import RosePetals from "./components/RosePetals";
 import HeartfeltWords from "./components/HeartfeltWords";
 import MusicPlayer from "./components/MusicPlayer";
+import RosePetals from "./components/RosePetals";
 
 const FIREFLY_COUNT = 20;
 

@@ -76,7 +76,7 @@ const BirthdayReveal: React.FC = () => {
         title="Love, as Infinite as the Stars! ✨❤️"
         message="Your love is the melody of my heart, and tonight, the universe sings for you."
         buttonText="Discover the Words of My Heart ❤️"
-        redirectUrl="/heartfelt"
+        redirectUrl="/celebration"
       />
 
     </div>
