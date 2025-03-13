@@ -4,8 +4,8 @@ interface CakeSVGProps extends React.SVGProps<SVGSVGElement> { }
 
 const CakeSVG = (props: CakeSVGProps) => (
   <svg
-    width={40}
-    height={40}
+    width={props.width || 40}
+    height={props.height || 40}
     viewBox="0 0 4 4"
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"

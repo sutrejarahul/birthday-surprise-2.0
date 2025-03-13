@@ -65,7 +65,7 @@ const HeartfeltWords: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
         >
-          <span className="flex items-center">Reveal My Feelings 💖</span>
+          <span className="flex items-center">A Special Melody for You 🎶💖</span>
         </motion.button>
       )}
 

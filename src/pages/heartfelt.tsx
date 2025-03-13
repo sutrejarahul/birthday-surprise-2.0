@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Poem from "./components/Poem";
 import RosePetals from "./components/RosePetals";
 import HeartfeltWords from "./components/HeartfeltWords";
+import MusicPlayer from "./components/MusicPlayer";
 
 const FIREFLY_COUNT = 20;
 
@@ -28,21 +29,36 @@ const RomanticMessage: React.FC = () => {
     if (audioRef.current) {
       audioRef.current.volume = 0.5; // 🔊 Adjust volume
       audioRef.current.play().catch(() => console.log("User interaction needed for autoplay."));
+
+      // Stop background music when it ends
+      audioRef.current.onended = () => {
+        if (audioRef.current) {
+          audioRef.current.pause();
+          audioRef.current.currentTime = 0; // Reset to start
+        }
+      };
     }
   }, []);
+
+  // 🎶 Stop music when poem is revealed
+  useEffect(() => {
+    if (showPoem && audioRef.current) {
+      audioRef.current.pause();
+    }
+  }, [showPoem]);
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen px-6 bg-gradient-to-br from-[#f6e1c3] to-[#e0a96d] text-[#8B4513] text-center overflow-hidden">
       <RosePetals />
 
       {/* 🎶 Background Romantic Music */}
-      <audio ref={audioRef} loop autoPlay>
+      <audio ref={audioRef} autoPlay>
         <source src="romantic.mp3" type="audio/mp3" />
       </audio>
 
       {/* 💖 Message Box */}
       <div className="max-w-5xl relative z-10">
-        {!showPoem ? <HeartfeltWords onFinish={() => setShowPoem(true)} /> : <Poem />}
+        {!showPoem ? <HeartfeltWords onFinish={() => setShowPoem(true)} /> : <MusicPlayer />}
       </div>
 
       {/* ✨ Fireflies Animation */}
