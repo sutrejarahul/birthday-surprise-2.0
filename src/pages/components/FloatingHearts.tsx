@@ -6,7 +6,9 @@ interface FloatingHeartsProps {
 }
 
 const FloatingHearts: React.FC<FloatingHeartsProps> = ({ playHearts }) => {
-  const [hearts, setHearts] = useState<{ id: number; left: string; animationDelay: string; size: string }[]>([]);
+  const [hearts, setHearts] = useState<
+    { id: number; left: string; animationDelay: string; size: string }[]
+  >([]);
 
   useEffect(() => {
     if (!playHearts) {
@@ -16,42 +18,44 @@ const FloatingHearts: React.FC<FloatingHeartsProps> = ({ playHearts }) => {
 
     const createHeart = () => {
       const id = Math.random();
-      const size = `${Math.random() * 20 + 15}px`;
       setHearts((prev) => [
         ...prev,
         {
           id,
           left: `${Math.random() * 100}%`,
-          animationDelay: `${Math.random() * 2}s`, // Shorter delay for smoother start
-          size,
+          animationDelay: `${Math.random() * 2}s`,
+          size: `${Math.random() * 20 + 15}px`,
         },
       ]);
+
       setTimeout(() => {
         setHearts((prev) => prev.filter((heart) => heart.id !== id));
       }, 7000);
     };
 
-    const interval = setInterval(createHeart, 500); // More frequent hearts
+    const interval = setInterval(createHeart, 500);
+
     return () => clearInterval(interval);
   }, [playHearts]);
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {hearts.map((heart) => (
+      {hearts.map(({ id, left, animationDelay, size }) => (
         <div
-          key={heart.id}
+          key={id}
           className="absolute text-red-500"
           style={{
-            left: heart.left,
-            fontSize: heart.size, // Bigger hearts
+            left,
+            fontSize: size,
             opacity: 0,
             visibility: "hidden",
-            animation: `floatUp 7s linear ${heart.animationDelay} forwards, fadeIn 0.5s ease-in ${heart.animationDelay} forwards`,
+            animation: `floatUp 7s linear ${animationDelay} forwards, fadeIn 0.5s ease-in ${animationDelay} forwards`,
           }}
         >
           <HeartSVG />
         </div>
       ))}
+
       <style>
         {`
           @keyframes floatUp {
@@ -61,7 +65,7 @@ const FloatingHearts: React.FC<FloatingHeartsProps> = ({ playHearts }) => {
               visibility: visible;
             }
             100% {
-              transform: translateY(-10vh) scale(1.4); /* Bigger scaling */
+              transform: translateY(-10vh) scale(1.4);
               opacity: 0;
             }
           }

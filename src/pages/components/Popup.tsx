@@ -15,9 +15,11 @@ const Popup: React.FC<PopupProps> = ({ show, title, message, buttonText, redirec
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    let timer: NodeJS.Timeout;
     if (show) {
-      setTimeout(() => setVisible(true), 1000); // Delay for smooth appearance
+      timer = setTimeout(() => setVisible(true), 1000); // Delay for smooth appearance
     }
+    return () => clearTimeout(timer); // Cleanup timeout to prevent potential issues
   }, [show]);
 
   return (

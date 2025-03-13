@@ -1,18 +1,22 @@
 "use client";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
 import HeartfeltWords from "./components/HeartfeltWords";
 import MusicPlayer from "./components/MusicPlayer";
 import RosePetals from "./components/RosePetals";
 
-const FIREFLY_COUNT = 20;
+const FIREFLY_COUNT = 35; // Increased for a richer effect
 
-const generateFireflyPositions = () => {
-  return Array.from({ length: FIREFLY_COUNT }, () => ({
-    top: Math.random() * 100 + "vh",
-    left: Math.random() * 100 + "vw",
+const generateFireflyPositions = () =>
+  Array.from({ length: FIREFLY_COUNT }, (_, i) => ({
+    top: `${Math.random() * 100}vh`,
+    left: `${i % 3 === 0
+      ? Math.random() * 33
+      : i % 3 === 1
+        ? Math.random() * 33 + 33
+        : Math.random() * 34 + 66
+      }vw`,
   }));
-};
 
 const RomanticMessage: React.FC = () => {
   const [fireflyPositions, setFireflyPositions] = useState<{ top: string; left: string }[]>([]);
@@ -20,26 +24,30 @@ const RomanticMessage: React.FC = () => {
   const [showPoem, setShowPoem] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  useEffect(() => {
-    setFireflyPositions(generateFireflyPositions());
-    setIsClient(true);
-
-    // 🎵 Autoplay Fix
+  // 🔊 Handle Music Playback
+  const handleMusicPlayback = useCallback(() => {
     if (audioRef.current) {
-      audioRef.current.volume = 0.5; // 🔊 Adjust volume
-      audioRef.current.play().catch(() => console.log("User interaction needed for autoplay."));
+      audioRef.current.volume = 0.5;
+      audioRef.current
+        .play()
+        .catch(() => console.log("User interaction needed for autoplay."));
 
-      // Stop background music when it ends
+      // Stop music when it ends
       audioRef.current.onended = () => {
         if (audioRef.current) {
           audioRef.current.pause();
-          audioRef.current.currentTime = 0; // Reset to start
+          audioRef.current.currentTime = 0;
         }
       };
     }
   }, []);
 
-  // 🎶 Stop music when poem is revealed
+  useEffect(() => {
+    setFireflyPositions(generateFireflyPositions());
+    setIsClient(true);
+    handleMusicPlayback(); // Start music
+  }, [handleMusicPlayback]);
+
   useEffect(() => {
     if (showPoem && audioRef.current) {
       audioRef.current.pause();
